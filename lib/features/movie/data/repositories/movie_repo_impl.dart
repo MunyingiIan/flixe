@@ -40,8 +40,8 @@ class MovieRepositoryImpl implements MovieRepository {
       final movieResponse = await api.tmdb.v3.discover.getMovies(
           withGenres: id.toString(),
           page: page,
-          watchRegion: 'IN',
-          withOrginalLanguage: 'hi');
+          watchRegion: 'KE',
+          withOrginalLanguage: 'en');
       List<Map<String, dynamic>> results = (movieResponse['results'] as List)
           .map((e) => Map<String, dynamic>.from(e))
           .toList();
