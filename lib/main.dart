@@ -40,7 +40,7 @@ class App extends StatelessWidget {
               create: (context) => sl<SearchBloc>()), // History Bloc
         ],
         child: GetMaterialApp(
-          title: 'FlixStar',
+          title: 'Flixe',
           debugShowCheckedModeBanner: false,
           theme: theme,
           home: Home(),
