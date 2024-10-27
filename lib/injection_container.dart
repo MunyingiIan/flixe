@@ -57,11 +57,20 @@ Future<void> initialiseDependencies() async {
 
   await checkForNewUpdate();
   await Hive.initFlutter();
-  await Future.wait([
-    Hive.openBox('library'),
-    Hive.openBox('settings'),
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  ]);
+
+  if (!kIsWeb) {
+    await Future.wait([
+      Hive.openBox('library'),
+      Hive.openBox('settings'),
+    ]);
+  } else {
+    await Future.wait([
+      Hive.openBox('library'),
+      Hive.openBox('settings'),
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+    ]);
+  }
+
 }
 
 Future<void> dependencies() async {
