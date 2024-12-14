@@ -83,7 +83,7 @@ class _WebVideoPlayerState extends State<MoviePlayer> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    _showInterstitialAd();
+    // _showInterstitialAd();
     _interstitialAd?.dispose();
   }
 
