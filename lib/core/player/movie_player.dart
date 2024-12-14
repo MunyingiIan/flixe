@@ -19,7 +19,7 @@ class MoviePlayer extends StatefulWidget {
   State<MoviePlayer> createState() => _WebVideoPlayerState();
 }
 
-// COmment
+// Comment
 //
 
 class _WebVideoPlayerState extends State<MoviePlayer> {
