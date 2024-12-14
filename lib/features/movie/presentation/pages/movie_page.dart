@@ -55,7 +55,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       slivers: [
         buildAppBar(context, widget.movie),
         buildOverview(widget.movie),
-        buildBannerAD(bannerAd),
+        // buildBannerAD(bannerAd),
         buildSimilarMovies(context)
       ],
     );
