@@ -57,7 +57,7 @@ class _TvDetailsPageState extends State<TvDetailsPage> {
       slivers: [
         buildAppBar(context, widget.tv),
         buildTVOverview(widget.tv),
-        buildBannerAd(),
+        // buildBannerAd(),
         buildSimilarTvs(context)
       ],
     );
