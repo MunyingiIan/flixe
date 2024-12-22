@@ -1,3 +1,4 @@
+import 'package:flixstar/api/api.dart';
 import 'package:flixstar/api/gogo_api.dart';
 import 'package:flixstar/features/movie/data/models/movie_model.dart';
 import 'package:flixstar/features/anime/data/models/source_model.dart';
@@ -62,5 +63,19 @@ class DNavigator {
     final sources =
         await goAnime.getEpisodesLinksOfAnime(anime, count: anime.episodes!);
     return sources;
+  }
+}
+
+void handleDeepLink(Uri uri) {
+  if (uri.host == 'movie') {
+    final movieId = int.tryParse(uri.pathSegments.last);
+    if (movieId != null) {
+      // Navigate to movie details
+      final api = sl<API>();
+      api.tmdb.v3.movies.getDetails(movieId).then((response) {
+        final movie = Movie.fromJson(response as Map<String, dynamic>);
+        DNavigator.toMovieDetails(movie);
+      });
+    }
   }
 }
