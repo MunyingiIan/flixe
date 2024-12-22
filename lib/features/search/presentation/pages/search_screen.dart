@@ -12,6 +12,15 @@ import 'package:get/get.dart';
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
+  void _performSearch(BuildContext context, String? query) {
+    if (query != null && query.isNotEmpty) {
+      context.read<SearchBloc>().add(InitiateSearchEvent(query));
+      Get.to(() => SearchResultPage(query: query));
+    } else {
+      MySnackBar.showredSnackBar(context, message: 'Please Enter a Query');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final FocusNode focusNode = FocusNode(debugLabel: 'SearchFocusNode');
@@ -37,23 +46,21 @@ class SearchScreen extends StatelessWidget {
               autofocus: true,
               style: const TextStyle(color: Colors.white),
               cursorColor: Colors.white,
+              textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                   hintText: 'Search...',
                   hintStyle: TextStyle(color: Colors.white54),
                   border: InputBorder.none,
                   suffix: IconButton(
                       onPressed: () {
-                        if (query != null && query!.isNotEmpty) {
-                          Get.to(() => SearchResultPage(query: query ?? ""));
-                        } else {
-                          MySnackBar.showredSnackBar(context,
-                              message: 'Please Enter a Query');
-                        }
+                        _performSearch(context, query);
                       },
                       icon: Icon(Icons.search))),
               onChanged: (value) {
                 query = value;
-                context.read<SearchBloc>().add(InitiateSearchEvent(value));
+              },
+              onSubmitted: (value) {
+                _performSearch(context, value);
               },
               onTap: () {
                 focusNode.requestFocus();
