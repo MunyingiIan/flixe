@@ -46,11 +46,18 @@ final sl = GetIt.instance;
 final analytics = FirebaseAnalytics.instance;
 
 Future<void> initialiseDependencies() async {
-  await dependencies();
+  // Initialize Firebase first if not already initialized
+  if (!kIsWeb && !Platform.isWindows && Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      name: 'Flix',
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
+  await dependencies(); // Set up other dependencies
+
   if (!kIsWeb) {
     if (!Platform.isWindows) {
-      await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform);
       await fetchFirebaseData();
     }
   }
@@ -70,7 +77,6 @@ Future<void> initialiseDependencies() async {
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
     ]);
   }
-
 }
 
 Future<void> dependencies() async {

@@ -1,5 +1,5 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/iankahiga/fvm/versions/3.24.5
+FLUTTER_ROOT=/Users/iankahiga/fvm/versions/3.24.3
 FLUTTER_APPLICATION_PATH=/Users/iankahiga/Development/DTV/flixe
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib/main.dart

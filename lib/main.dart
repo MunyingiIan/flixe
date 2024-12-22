@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flixstar/core/routes/routes.dart';
+import 'package:flixstar/firebase_options.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:flixstar/core/player/movie_player.dart';
 import 'package:flixstar/core/player/tv_player.dart';
@@ -22,21 +24,28 @@ import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables
   await dotenv.load(fileName: '.env');
+
+  // Initialize dependencies (which includes Firebase initialization)
   await initialiseDependencies();
+
+  // Handle deep links for TV channel (if Android platform)
   if (Platform.isAndroid) {
-    // Handle deep links for TV channel
     final initialUri = await getInitialUri();
     if (initialUri != null) {
       handleDeepLink(initialUri);
     }
-    // Handle deep links when app is running
+
     uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
         handleDeepLink(uri);
       }
     });
   }
+
+  // Run the app
   runApp(isUpdateAvailable ? UpdateWarningScreen() : App());
 }
 
