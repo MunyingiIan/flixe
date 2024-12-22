@@ -13,7 +13,7 @@
     <application
         android:label="Flix"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon"
+        android:icon="@mipmap/ic_launcher"
         android:banner="@drawable/tv_banner">
         <activity
             android:name=".MainActivity"
