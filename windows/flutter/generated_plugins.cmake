@@ -3,12 +3,14 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  bonsoir_windows
   cloud_firestore
   firebase_core
   fullscreen_window
   permission_handler_windows
   share_plus
   url_launcher_windows
+  webview_universal
   webview_windows
 )
 

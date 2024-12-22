@@ -60,15 +60,21 @@ android {
         pickFirst 'lib/**/libc++_shared.so'
     }
 
+    signingConfigs {
+        release {
+            storeFile file("upload-keystore.jks")
+            storePassword "your-store-password"
+            keyAlias "upload"
+            keyPassword "your-key-password"
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.release
             minifyEnabled true
-         proguardFiles getDefaultProguardFile(
-                 'proguard-android-optimize.txt'),
-                 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -79,4 +85,5 @@ flutter {
 
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.leanback:leanback:1.0.0"
 }

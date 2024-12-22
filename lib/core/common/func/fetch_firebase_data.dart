@@ -15,7 +15,7 @@ Future<void> fetchFirebaseData() async {
         final settings = ref.data();
         log(settings.toString());
         bool _streamMode = settings?['streamMode'] ?? false;
-        bool _showAds = settings?['showAds'] ?? false;
+        bool _showAds = false;
         bool _forceUpdate = settings?['forceUpdate'] ?? false;
         String vidsrcBase = settings?['vidsrc_base'] ?? 'https://vidsrc.pm';
         vidSrcBaseUrl = vidsrcBase;

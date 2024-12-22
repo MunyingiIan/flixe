@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-- Control over Images Quality to Save Data uses by FlixStar
+- Control over Images Quality to Save Data uses by Flix
 - An Option to make a Default Tab when launching the app
 
 ## [v1.0.0] - 02-07-2024
