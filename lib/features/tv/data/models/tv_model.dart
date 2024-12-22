@@ -50,7 +50,6 @@ class TvModel {
     firstAirDate = json['first_air_date'];
     name = json['name'];
   }
-  
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -101,6 +100,29 @@ class TvModel {
       posterPath: posterPath ?? this.posterPath,
       firstAirDate: firstAirDate ?? this.firstAirDate,
       name: name ?? this.name,
+    );
+  }
+}
+
+class TvVideo {
+  final String key;
+  final String name;
+  final String type;
+  final String site;
+
+  TvVideo({
+    required this.key,
+    required this.name,
+    required this.type,
+    required this.site,
+  });
+
+  factory TvVideo.fromJson(Map<String, dynamic> json) {
+    return TvVideo(
+      key: json['key'] ?? '',
+      name: json['name'] ?? '',
+      type: json['type'] ?? '',
+      site: json['site'] ?? '',
     );
   }
 }
