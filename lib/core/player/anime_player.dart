@@ -72,22 +72,31 @@ class _WebVideoPlayerState extends State<AnimePlayer> {
   }
   @override
   void dispose() {
-    super.dispose();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    _showInterstitialAd();
+    // Reset orientation and UI mode
+    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     _interstitialAd?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Set immersive mode for video playback
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    return buildEZWV(context, widget.source);
+
+    return WillPopScope(
+      onWillPop: () async {
+        // Reset orientation and UI mode on back navigation
+        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+        return true;
+      },
+      child: buildEZWV(context, widget.source),
+    );
   }
 }
 
