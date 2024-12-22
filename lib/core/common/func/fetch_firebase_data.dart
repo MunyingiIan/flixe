@@ -19,7 +19,7 @@ Future<void> fetchFirebaseData() async {
           'streamMode': true,
           'showAds': false,
           'forceUpdate': false,
-          'vidsrc_base': 'https://vidsrc.to/embed',
+          'vidsrc_base': 'https://vidsrc.pm',
         });
       }
 
@@ -30,7 +30,7 @@ Future<void> fetchFirebaseData() async {
       streamMode = settings['streamMode'] ?? true;
       showAds = settings['showAds'] ?? false;
       forceUpdate = settings['forceUpdate'] ?? false;
-      vidSrcBaseUrl = settings['vidsrc_base'] ?? 'https://vidsrc.to/embed';
+      vidSrcBaseUrl = settings['vidsrc_base'] ?? 'https://vidsrc.pm';
 
       log('Configured with: streamMode=$streamMode, showAds=$showAds, forceUpdate=$forceUpdate, vidSrcBaseUrl=$vidSrcBaseUrl');
     } catch (e) {
@@ -39,7 +39,7 @@ Future<void> fetchFirebaseData() async {
       streamMode = true;
       showAds = false;
       forceUpdate = false;
-      vidSrcBaseUrl = 'https://vidsrc.to/embed';
+      vidSrcBaseUrl = 'https://vidsrc.pm';
     }
   }
 }
