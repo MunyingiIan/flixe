@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:flixstar/api/api.dart';
+import 'package:flixstar/features/movie/data/models/movie_model.dart';
 import 'package:flixstar/features/tv/data/models/tv_model.dart';
 import 'package:flixstar/features/tv/presentation/widgets/app_bar.dart';
+import 'package:flixstar/features/movie/presentation/widgets/movie_trailer.dart';
 
 import 'package:flixstar/features/tv/presentation/widgets/overview.dart';
 import 'package:flixstar/features/tv/presentation/widgets/related_tvs.dart';
@@ -22,9 +25,12 @@ class TvDetailsPage extends StatefulWidget {
 class _TvDetailsPageState extends State<TvDetailsPage> {
   final startAppSdk = sl<StartAppSdk>();
   StartAppBannerAd? bannerAd;
+  List<MovieVideo> trailers = [];
 
   @override
   void initState() {
+    super.initState();
+    _loadTrailers();
     if (!kIsWeb) {
       if (!Platform.isWindows) {
         startAppSdk.loadBannerAd(StartAppBannerType.BANNER).then((bannerAd) {
@@ -38,7 +44,21 @@ class _TvDetailsPageState extends State<TvDetailsPage> {
         });
       }
     }
-    super.initState();
+  }
+
+  Future<void> _loadTrailers() async {
+    final api = sl<API>();
+    final tvTrailers = await api.getTvTrailers(widget.tv.id!);
+    setState(() {
+      trailers = tvTrailers
+          .map((tvVideo) => MovieVideo(
+                key: tvVideo.key,
+                name: tvVideo.name,
+                type: tvVideo.type,
+                site: tvVideo.site,
+              ))
+          .toList();
+    });
   }
 
   @override
@@ -57,6 +77,7 @@ class _TvDetailsPageState extends State<TvDetailsPage> {
       slivers: [
         buildAppBar(context, widget.tv),
         buildTVOverview(widget.tv),
+        MovieTrailer(trailers: trailers),
         // buildBannerAd(),
         buildSimilarTvs(context)
       ],
