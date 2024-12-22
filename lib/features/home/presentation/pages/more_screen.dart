@@ -22,7 +22,7 @@ class MoreOptionScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'FlixStar',
+            'Flix',
             style:
                 TextStyle(fontWeight: FontWeight.bold, fontSize: 24, shadows: [
               Shadow(color: Colors.black, blurRadius: 16),
@@ -121,7 +121,7 @@ class MoreOptionScreen extends StatelessWidget {
                       context: context,
                       builder: (context) => AlertDialog(
                             title: Text('Update Available'),
-                            content: Text('New update available for FlixStar'),
+                            content: Text('New update available for Flix'),
                             actions: [
                               TextButton(
                                   onPressed: () => Get.back(),

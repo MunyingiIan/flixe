@@ -25,7 +25,7 @@ SliverLayoutBuilder sliverCarouselMovieBar(BuildContext context,
             },
             icon: Icon(Icons.search))
       ],
-      title: Text('FlixStar',
+      title: Text('Flix',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
@@ -130,7 +130,7 @@ SliverLayoutBuilder sliverCarouselTvBar(BuildContext context,
             },
             icon: Icon(Icons.search))
       ],
-      title: Text('FlixStar',
+      title: Text('Flix',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,

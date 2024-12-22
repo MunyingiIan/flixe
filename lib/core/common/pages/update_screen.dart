@@ -13,7 +13,7 @@ class UpdateWarningScreen extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text('FlixStar', style: TextStyle(color: Colors.white)),
+          title: Text('Flix', style: TextStyle(color: Colors.white)),
           centerTitle: true,
         ),
         backgroundColor: Colors.black12,

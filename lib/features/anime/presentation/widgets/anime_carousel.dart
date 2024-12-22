@@ -19,7 +19,7 @@ SliverLayoutBuilder customAnimeCarousel(BuildContext context,
             icon: Icon(Icons.search))
       ],
       title: Text(
-        'FlixStar',
+        'Flix',
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, shadows: [
           Shadow(
             color: Colors.black,
