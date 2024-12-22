@@ -5,7 +5,7 @@ class TvChannelManager {
   static const platform = MethodChannel('flixstar/tv_channel');
   static const String channelId = "trending_movies_channel";
   static const String channelName = "Trending Movies";
-  static const String channelDesc = "Shows trending movies from Flixstar";
+  static const String channelDesc = "Shows trending movies from Flix";
 
   Future<void> createChannel() async {
     try {
