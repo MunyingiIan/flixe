@@ -40,18 +40,30 @@ dependencies:
   version: ^3.0.2
   firebase_analytics: ^11.2.1
   flutter_dotenv: ^5.1.0
-  # webview_flutter: ^4.9.0
+  webview_flutter: ^4.0.0
   http: ^1.2.2
   startapp_sdk: ^1.0.1
-  # webview_universal: ^0.0.5
+  webview_universal: ^0.0.5
+  flutter_launcher_icons: ^0.14.1
+  cast: ^2.1.0
+  bonsoir: ^5.1.10
+  uni_links: ^0.5.1
 
+dependency_overrides:
+  win32: ^5.5.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
   retrofit_generator: ^8.1.0
-  build_runner: ^2.4.10
+  build_runner: ^2.4.8
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/flixe_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 flutter:
   uses-material-design: true
