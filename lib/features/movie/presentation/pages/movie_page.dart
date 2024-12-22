@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flixstar/api/api.dart';
 import 'package:flixstar/features/movie/presentation/widgets/app_bar.dart';
 import 'package:flixstar/features/movie/presentation/widgets/overview.dart';
 import 'package:flixstar/features/movie/presentation/widgets/related_movie.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flixstar/features/movie/data/models/movie_model.dart';
 import 'package:startapp_sdk/startapp.dart';
+import 'package:flixstar/features/movie/presentation/widgets/movie_trailer.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   final Movie movie;
@@ -20,9 +22,12 @@ class MovieDetailsPage extends StatefulWidget {
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
   final startAppSdk = sl<StartAppSdk>();
   StartAppBannerAd? bannerAd;
+  List<MovieVideo> trailers = [];
 
   @override
   void initState() {
+    super.initState();
+    _loadTrailers();
     if (!kIsWeb) {
       if (!Platform.isWindows) {
         startAppSdk.loadBannerAd(StartAppBannerType.BANNER).then((bannerAd) {
@@ -36,7 +41,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         });
       }
     }
-    super.initState();
+  }
+
+  Future<void> _loadTrailers() async {
+    final api = sl<API>();
+    final movieTrailers = await api.getMovieTrailers(widget.movie.id!);
+    setState(() {
+      trailers = movieTrailers;
+    });
   }
 
   @override
@@ -55,6 +67,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       slivers: [
         buildAppBar(context, widget.movie),
         buildOverview(widget.movie),
+        MovieTrailer(trailers: trailers),
         // buildBannerAD(bannerAd),
         buildSimilarMovies(context)
       ],

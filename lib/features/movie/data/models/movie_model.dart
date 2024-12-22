@@ -83,24 +83,23 @@ class Movie {
     return data;
   }
 
-  Movie copyWith({
-    bool? adult,
-    String? backdropPath,
-    List<int>? genreIds,
-    int? id,
-    String? name,
-    String? originalLanguage,
-    String? originalTitle,
-    String? overview,
-    double? popularity,
-    String? posterPath,
-    String? releaseDate,
-    String? title,
-    bool? video,
-    double? voteAverage,
-    int? voteCount,
-    String? source
-  }) {
+  Movie copyWith(
+      {bool? adult,
+      String? backdropPath,
+      List<int>? genreIds,
+      int? id,
+      String? name,
+      String? originalLanguage,
+      String? originalTitle,
+      String? overview,
+      double? popularity,
+      String? posterPath,
+      String? releaseDate,
+      String? title,
+      bool? video,
+      double? voteAverage,
+      int? voteCount,
+      String? source}) {
     return Movie(
       source: source ?? this.source,
       adult: adult ?? this.adult,
@@ -118,6 +117,30 @@ class Movie {
       video: video ?? this.video,
       voteAverage: voteAverage ?? this.voteAverage,
       voteCount: voteCount ?? this.voteCount,
+    );
+  }
+}
+
+// Add this class to handle video/trailer data
+class MovieVideo {
+  final String key;
+  final String name;
+  final String type;
+  final String site;
+
+  MovieVideo({
+    required this.key,
+    required this.name,
+    required this.type,
+    required this.site,
+  });
+
+  factory MovieVideo.fromJson(Map<String, dynamic> json) {
+    return MovieVideo(
+      key: json['key'] ?? '',
+      name: json['name'] ?? '',
+      type: json['type'] ?? '',
+      site: json['site'] ?? '',
     );
   }
 }
