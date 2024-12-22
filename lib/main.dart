@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:flixstar/core/routes/routes.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:flixstar/core/player/movie_player.dart';
 import 'package:flixstar/core/player/tv_player.dart';
 import 'package:flixstar/features/tv/presentation/bloc/tv_bloc.dart';
@@ -15,11 +18,25 @@ import 'package:flixstar/features/library/presentation/bloc/library_bloc.dart';
 import 'package:flixstar/features/movie/presentation/bloc/movie_bloc.dart';
 import 'package:flixstar/features/search/presentation/bloc/search_bloc.dart';
 import 'package:flixstar/injection_container.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   await initialiseDependencies();
+  if (Platform.isAndroid) {
+    // Handle deep links for TV channel
+    final initialUri = await getInitialUri();
+    if (initialUri != null) {
+      handleDeepLink(initialUri);
+    }
+    // Handle deep links when app is running
+    uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        handleDeepLink(uri);
+      }
+    });
+  }
   runApp(isUpdateAvailable ? UpdateWarningScreen() : App());
 }
 
@@ -40,7 +57,7 @@ class App extends StatelessWidget {
               create: (context) => sl<SearchBloc>()), // History Bloc
         ],
         child: GetMaterialApp(
-          title: 'Flixe',
+          title: 'Flix',
           debugShowCheckedModeBanner: false,
           theme: theme,
           home: Home(),

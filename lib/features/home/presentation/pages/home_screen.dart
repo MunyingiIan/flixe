@@ -1,3 +1,4 @@
+import 'package:flixstar/core/services/tv_channel_service.dart';
 import 'package:flixstar/features/history/presentation/bloc/history_bloc.dart';
 import 'package:flixstar/features/history/presentation/bloc/history_state.dart';
 import 'package:flixstar/features/movie/data/models/genre_movie_model.dart';
@@ -11,6 +12,7 @@ import 'package:flixstar/features/movie/presentation/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,6 +28,9 @@ class HomeScreen extends StatelessWidget {
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is HomeLoadedState || state is HomeAnimeLoadingState) {
+              if (Platform.isAndroid) {
+                TvChannelService().updateTrendingMoviesChannel();
+              }
               return CustomScrollView(
                 slivers: [
                   sliverCarouselMovieBar(context, movies: state.trendingMovie!),
@@ -56,7 +61,6 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return GenreMovieList(genre: state.movieGenres![index]);
                       }),
-                  
                 ],
               );
             } else if (state is HomeLoadingState) {
